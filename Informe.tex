@@ -65,7 +65,67 @@ utilizando la adición modular.
 Es una función para resumir o identificar probabilísticamente un gran
 conjunto de información, dando como resultado un conjunto imagen finito
 generalmente menor. Varían en los conjuntos de partida y de llegada y en
-cómo afectan a la salida similitudes o patrones de la entrada
+cómo afectan a la salida similitudes o patrones de la entrada.\\\
+{Para encontrar la \emph{función hash} no existe una regla que permita
+determinar cuál será la función más apropiada para generar un conjunto
+de claves que aseguren la máxima uniformidad en la distribución de las
+mismas. Algunas de las funciones hash más utilizadas son las
+siguientes:}
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Función cuadrada.
+\item
+  Función plegamiento.
+\item
+  Función truncamiento.
+\end{itemize}
+
+La función módulo o por división toma el residuo de la división entre la
+clave y el total de elementos de la estructura, generando la siguiente
+fórmula: \\[0.4cm]dirección = (clave \% total elementos)\\[0.4cm] Para lograr una mayor
+uniformidad en la distribución de los elementos, se debe buscar que el
+valor que se usa en el total de elementos sea un número primo más
+cercano al tamaño de la estructura. \\Ejemplo. Si tenemos un total de 100
+elementos y dos claves que sean 7259 y 9359, las direcciones generadas
+son las siguientes: \\[0.4cm]dirección = (7259\%100) = 59 \\dirección = (9359\%100)
+= 59 \\[0.4cm]Estos dos casos generan una colisión, ya que los dos números no se
+pueden asignar dentro de la misma dirección en la estructura, para
+evitar la colisión, se cambia el valor de 100 por el numero primo más
+cercano a él, en este caso seria un 97, lo que generaría las siguientes
+direcciones:\\[0.4cm] dirección = (7259\%97) = 81 \\dirección = (9359\%97) = 47\\[2.0cm]
+La función cuadrada como su nombre lo indica eleva al cuadrado la clave
+y del resultado, se toman los dígitos centrales como la dirección. El
+número de dígitos a tomar se determina del por el rango del índice de
+toda la estructura. La fórmula hash es la siguiente: dirección = dígitos
+centrales (clave2) Ejemplo. Si tenemos un total de 100 elementos y dos
+claves que sean 7259 y 9359, las direcciones generadas son las
+siguientes:\\[0.4cm] dirección = dígitos centrales (72592) = 52693081 = 93\\
+dirección = dígitos centrales (93592) = 87590881 = 90\\ Como el rango de
+claves es de 1 a 100 se toman dos dígitos centrales.\\[0.4cm]
+La función plegamiento divide la clave en partes de igual número de
+dígitos (la última puede tener menos dígitos), tomando como dirección
+los dígitos menos significativos, después de realizar una operación
+entre las partes, ya sea una serie de sumas o de multiplicaciones. La
+fórmula seria la siguiente:\\[0.4cm] dirección = dígitos menos significativos
+(suma de partes)\\ dirección = dígitos menos significativos
+(multiplicación de partes)\\[0.4cm] Ejemplo. Si tenemos un total de 100
+elementos y dos claves que sean 7259 y 9359, las direcciones generadas
+son las siguientes:\\ dirección = dígitos menos significativos (72 + 59)
+= dígitos menos significativos (131) = 31\\ dirección = dígitos menos
+significativos (93 + 59) = dígitos menos significativos (152) = 52\\[0.4cm]
+Como el rango de claves es de 1 a 100 se toman dos dígitos para las
+particiones y para la dirección.\\ La función truncamiento toma algunos
+de los dígitos de las claves y forma con ellos una dirección. La
+elección de los dígitos es arbitraria, podrían tomarse los de las
+posiciones pares o impares para con ellos generar la dirección donde se
+almacenara la clave, uniendo los dígitos de izquierda a derecha o de
+derecha a izquierda, su fórmula es la siguiente:\\[0.4cm] dirección = elegir
+dígitos (unión dígitos)\\ Ejemplo. Si tenemos un total de 100 elementos
+y dos claves que sean 7259 y 9359, las direcciones generadas son las
+siguientes:\\ dirección = elegir dígitos (7, 5) = 75\\ dirección =
+elegir dígitos (9, 5) = 95\\[0.4cm] Para este caso se tomaron los dígitos
+impares y se unieron de izquierda a derecha.
 
 \subsection{Ventajas}
 
