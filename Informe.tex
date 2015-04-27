@@ -33,6 +33,9 @@ Chile - \today
 \end{center}
 
 \end{titlepage}
+\tableofcontents
+\appendix
+
 \newpage
 \begin{center}
 \section{Introducción}
@@ -77,4 +80,52 @@ adicional para los índices.
 El archivo no esta clasificado No permite llaves repetidas Solo permite
 acceso por una sola llave Costos Tiempo de procesamiento requerido para
 la aplicación de la función hash
+\newpage
+
+\section{Aplicación}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Es posible que existan claves resultantes iguales para objetos
+  diferentes, ya que el rango de posibles claves es mucho menor que el
+  de posibles objetos a resumir (las claves suelen tener en torno al
+  centenar de bits, pero los ficheros no tienen un tamaño límite).
+\item
+  Son usadas en múltiples aplicaciones, como los arrays asociativos,
+  criptografía, procesamiento de datos y firmas digitales, entre otros.
+  Una buena función de hash es una que experimenta pocas colisiones en
+  el conjunto esperado de entrada; es decir que se podrán identificar
+  unívocamente las entradas.
+\item
+  Las tablas hash, una de las aplicaciones más extendidas de las
+  funciones de hash, aceleran el proceso de búsqueda de un registro de
+  información según una clave (nota: este uso de la palabra poco se
+  relaciona con su significado habitual). Por ejemplo, una cadena
+  alfanumérica puede ser utilizada para buscar la información de un
+  empleado en la base de datos de un sistema.
+\item
+  La utilización de tablas hash provee un acceso casi directo a dichos
+  registros, lo que significa que, en promedio, una búsqueda puede
+  llegar a requerir sólo uno o dos intentos en la memoria o el archivo
+  que contiene la información. Naturalmente, se prefiere una buena
+  función de hash que evitará colisiones de hash.
+\item
+  Si asumimos que la clave es una cadena de bytes, entonces la función
+  de hash debería ser como un índice de los registros que tiene una
+  distribución aleatoria sobre las cadenas de entrada esperadas. De otra
+  forma, habría más colisiones de hash degradando así el tiempo de
+  búsqueda. Si, por ejemplo, la clave es alfabética, cada byte puede
+  tener sólo 26 de sus 256 valores posibles. Funciones tan simples no
+  distribuirán los índices de una forma pareja.
+\item
+  Para una comparación de velocidad y calidad de varias funciones de
+  hash, referirse a los enlaces externos.
+\end{itemize}
+\newpage
+\section{Conclusión}
+
+El método de búsqueda hash o por transformación de clave aumenta la
+velocidad de búsqueda sin necesidad de que los elementos estén
+previamente ordenados.
 \end{document}
