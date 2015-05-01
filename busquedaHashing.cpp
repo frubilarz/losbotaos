@@ -1,7 +1,7 @@
 /*
  * =====================================================================================
  *
- *       Filename:  codigotarea.cpp
+ *       Filename:  busquedaHashing.cpp
  *
  *    Description:  editando
  *
@@ -10,7 +10,7 @@
  *       Revision:  none
  *       Compiler:  gcc
  *
- *         Author:  YOUR NAME (), 
+ *         Author:  Felipe Canales 
  *   Organization:  
  *
  * =====================================================================================
