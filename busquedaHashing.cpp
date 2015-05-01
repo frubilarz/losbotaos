@@ -82,7 +82,7 @@ int contar (NodoArbol<T>* raiz)
 	return(1+contar(raiz->izq)+contar(raiz->der));
 }
 
-template <class T>x|
+template <class T>
 int niveles (NodoArbol<T>* raiz)
 {
 	int altizq, altder;
