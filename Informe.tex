@@ -37,15 +37,14 @@ Chile - \today
 \appendix
 
 \newpage
-\begin{center}
 \section{Introducción}
 
-En informática, hash se refiere a una función o método para generar
-claves o llaves que representan de manera casi unívoca a un
-documento,registr, arichivo, etc., resumir o identificar un dato a
-tráves de la probabilidad, utilizando una función hash o algoritmo hash.
-Un has es el resultado de dicha función o algoritmo
-\end{center}
+Una \emph{tabla Hash} es una estructura de datos que permite almacenar objetos de distinta índole, los cuales son asociados mediante una clave. La operación principal que es soportada de una manera eficiente, es la búsqueda; que permite el acceso a los objetos (los que pueden ser telefonos, nombres de usuarios, direcciones, etc.) almacenados a partir de una clave generada, a partir del objeto en análisis. Este proceso de transformado se realiza a partir de lo que se conoce como \emph{función hash} que convierte la clave en un hash, es decir, un número que identifica la posición en donde localizar el objeto deseado.
+
+Un ejemplo sencillo para ilustrar lo que es una tabla hash es el siguiente: Se necesita organizar los periódicos que llegan diariamente de tal forma que se puedan ubicar de forma rápida, entonces se hace de la siguiente forma - se hace una gran caja para guardar todos los periódicos (una tabla), y se divide en 31 contenedores (ahora es una "hash table" o tabla fragmentada), y la clave para guardar los periódicos es el día de publicación (índice). Cuando se requiere buscar un periódico se busca por el día que fue publicado y así se sabe en que zócalo (bucket) está. Varios periódicos quedarán guardados en el mismo zócalo (es decir colisionan al ser almacenados), lo que implica buscar en la sub-lista que se guarda en cada zócalo. De esta forma se reduce el tamaño de las búsquedas de $O(n)$ a, en el mejor de los casos, $O(1)$ y, en el peor, a $O(log(n))$.
+
+Básicamente, construir una tabla hash se refiere a una función o método para generar claves o llaves que representan de manera casi unívoca a un documento, registro, archivo, etc., es decir, resumir o identificar un dato a tráves de la probabilidad, utilizando una función hash o algoritmo hash. Siendo entonces un hash el resultado que otorga dicha función o algoritmo%.
+
 \newpage
 \section{Historia}
 
@@ -60,6 +59,10 @@ funciones matemáticas seleccionadas especialmente. Se hace que el rango
 de valores que puede devolver la función sea de longitud fija: 160 bits
 utilizando la adición modular.
 \newpage
+\section{Cálculo de complejidad}
+Aquí va la complejidad de la tabla hash
+\newpage
+
 \section{Función hash}
 
 Es una función para resumir o identificar probabilísticamente un gran
@@ -101,7 +104,8 @@ toda la estructura. La fórmula hash es la siguiente: dirección = dígitos
 centrales (clave2) Ejemplo. Si tenemos un total de 100 elementos y dos
 claves que sean 7259 y 9359, las direcciones generadas son las
 siguientes:\\[0.4cm] dirección = dígitos centrales (72592) = 52693081 = 93\\
-dirección = dígitos centrales (93592) = 87590881 = 90\\ Como el rango de
+dirección = dígitos centrales (93592) = 87590881 = 90\\ 
+Como el rango de
 claves es de 1 a 100 se toman dos dígitos centrales.\\[0.4cm]
 La función plegamiento divide la clave en partes de igual número de
 dígitos (la última puede tener menos dígitos), tomando como dirección
@@ -126,6 +130,28 @@ y dos claves que sean 7259 y 9359, las direcciones generadas son las
 siguientes:\\ dirección = elegir dígitos (7, 5) = 75\\ dirección =
 elegir dígitos (9, 5) = 95\\[0.4cm] Para este caso se tomaron los dígitos
 impares y se unieron de izquierda a derecha.
+\newpage
+
+\subsection{Propiedades de la función hash}
+
+La calidad de la función hash, está definida en base a ciertas propiedades (no necesariamente todas deben cumplirse) según el contexto en el cual se esté trabajando, las cuales son:
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Bajo costo: Calcular el valor hash de un objeto, necesita poco costo computacional (memoria).
+\item
+  Compresión: Una función hash comprime datos si puede mapear un dominio con datos de longitud muy grande a datos con longitud más pequeña.
+\item
+  Uniformidad: Se dice que una función hash es uniforme cuando para una clave elegida aleatoriamente es igualmente probable tener un valor hash determinado, independientemente de cualquier otro elemento.
+\newpage
+\item
+  Rango variable: En algunos casos, el rango de valores hash que maneje la función pueden ser diferentes a lo largo del tiempo. Este caso se da cuando, en función del tiempo, la tabla hash necesita expandir su capacidad de almacenamiento. Para estos casos, a la función hash se le indica un parámetro que alerte de estos escenarios.
+\item
+  Inyectividad (Perfección): La función hash que es perfecta, se dice que es inyectiva (esto ocurre cuando a cada dato le corresponde una clave diferente con respecto a otro). Para que pueda existir esta condición, es necesario que la cardinalidad del conjunto de objetos sea inferior a la del conjunto imágen. En la realidad es muy poco probable que ocurra esto, normalmente se da cuando se ingresan entradas preestablecidas. Por ejemplo: Ingresar los números del 1 al 100 por orden de aparición.
+\item
+  Determinismo: Una función hash se dice que es determinista cuando dada una cadena de entrada siempre devuelve el mismo valor hash. Es decir, el valor hash es el resultado de aplicar un algoritmo que opera sólo sobre la cadena de entrada. Ejemplos de funciones hash no-deterministas son aquellas funciones hash que dependen de parámetros externos, tales como generadores de números pseudoaleatorios o la fecha. Tampoco son deterministas aquellas funciones hash que dependen de la dirección de memoria en la que está almacenada la cadena de entrada. Esa dirección es accidental y no se considera un cambio de la cadena entrada en sí. De hecho puede cambiar dinámicamente durante la propia ejecución del algoritmo de la función hash.
+\end{itemize}
+\newpage
 
 \subsection{Ventajas}
 
@@ -140,6 +166,11 @@ adicional para los índices.
 El archivo no esta clasificado No permite llaves repetidas Solo permite
 acceso por una sola llave Costos Tiempo de procesamiento requerido para
 la aplicación de la función hash
+\newpage
+
+\subsection{Mediciones de tiempo}
+
+Mediciones de tiempo según la cantidad de datos dadas por enunciado 
 \newpage
 
 \section{Aplicación}
