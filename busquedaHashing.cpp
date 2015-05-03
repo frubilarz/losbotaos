@@ -1,23 +1,3 @@
-/*
- * =====================================================================================
- *
- *       Filename:  busquedaHashing.cpp
- *
- *    Description:  editando
- *
- *        Version:  1.0
- *        Created:  11/03/2013 05:27:49 PM
- *       Revision:  none
- *       Compiler:  gcc
- *
- *         Author:  Felipe Canales 
- *   Organization:  
- *
- * =====================================================================================
- */
-
-
-// CÃ³digo para el tercer examen parcial de Estructuras de Datos, semestre AD12, elaborado por RMM
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>
