@@ -13,11 +13,11 @@
 
 \title[Algoritmo de Hashing]{Algoritmo de Hashing}
 \subtitle{Búsqueda}
-\author[Martínez, Canales, Reyes, Rubilar]
-{D. Martínez \\
-F. Canales \\
-J. Reyes \\
-F. Rubilar}
+\author[Canales, Martínez, Reyes, Rubilar]
+{David Martínez Rivas \\
+Felipe Canales Saavedra\\
+Javier Reyes Gonzalez \\
+Fernando Rubilar Zepeda}
 \institute[EDEN \& HELL]
 {
   Universidad Tecnológica Metropolitana\\
@@ -60,11 +60,12 @@ F. Rubilar}
 
 \begin{frame}
   \frametitle{Propiedades de Función Hash}
+  La calidad de la función hash, está definida en base a ciertas propiedades (no necesariamente todas deben cumplirse) según el contexto en el cual se esté trabajando, las cuales son:
 	\begin{itemize}
   \item<1->{Bajo Costo}
   \item<2->{Compresión}
   \item<3->{Uniformidad}
-	\item<4->{Rango Variable}
+  \item<4->{Rango Variable}
   \item<5->{Inyectividad}
   \item<6->{Determinismo}
   \end{itemize}
@@ -85,6 +86,47 @@ F. Rubilar}
 	acceso por una sola llave Costos Tiempo de procesamiento requerido para
 	la aplicación de la función hash.
   \end{block}
+\end{frame}
+\begin{frame}
+	\frametitle{Mediciones de tiempo}
+	Mejor caso
+	\begin{table}[h]
+		\begin{tabular}{lll}
+			Cantidad de datos & Dato a buscar & Tiempo de ejecución(ms)\\
+			1000   & 993 & 0.00500679 \\
+			10000  & 993 & 0.00715256 \\
+			100000 & 993 & 0.00691414
+		\end{tabular}
+	\end{table}
+	\end{frame}
+	\begin{frame}
+		\frametitle{Mediciones de tiempo}
+	Caso Promedio
+	\begin{table}[h]
+		\begin{tabular}{lll}
+			Cantidad de datos & Dato a buscar & Tiempo de ejecución(ms)\\
+			1000 & 333     & 0.00596046 \\
+			10000 & 4596    & 0.0200272  \\
+			100000 & 45946   & 0.00619888 \\
+			1000000 & 345234  & 0.0119209  \\
+			10000000 & 4543456 & 0.00882149
+		\end{tabular}
+	\end{table}
+	\end{frame}
+	\begin{frame}
+		\frametitle{Mediciones de tiempo}
+	Peor Caso
+	\begin{table}[h]
+		\begin{tabular}{lll}
+			Cantidad de datos & Dato a buscar & Tiempo de ejecución(ms)\\
+			1000 & 207      & 0.00786781 \\
+			10000 & 8314    & 0.0190735  \\
+			100000 & 70823    & 0.0691414 \\
+			1000000 & 805591  & 0.0905991 \\
+			10000000 & 9999736  & 0.169277 
+		\end{tabular}
+	\end{table}
+
 \end{frame}
 
 \begin{frame}
