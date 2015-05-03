@@ -1,0 +1,103 @@
+
+\documentclass{beamer}
+\usepackage[spanish]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{multicol} % indice en 2 columnas
+
+\usetheme{Warsaw}
+\usecolortheme{crane}
+\useoutertheme{shadow}
+\useinnertheme{rectangles}
+
+\setbeamertemplate{navigation symbols}{} % quitar simbolitos
+
+\title[Algoritmo de Hashing]{Algoritmo de Hashing}
+\subtitle{Búsqueda}
+\author[Martínez, Canales, Reyes, Rubilar]
+{D. Martínez \\
+F. Canales \\
+J. Reyes \\
+F. Rubilar}
+\institute[EDEN \& HELL]
+{
+  Universidad Tecnológica Metropolitana\\
+  Profesor: Alejandro Reyes
+}
+
+\AtBeginSection{
+
+  \tableofcontents[currentsection]  
+}
+
+\AtBeginSubsection{
+  \tableofcontents[currentsection,currentsubsection]
+
+}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+  \frametitle{Introducción}
+  En esta presentación daremos a conocer el funcionamiento y las caracteríticas
+	que posee la función Hash. Dejando en claro sus ventajas, desventajas y las
+	propiedades de ésta.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Función Hash}
+  Es una función para resumir o identificar probabilísticamente un gran
+	conjunto de información, dando como resultado un conjunto imagen finito.
+	Algunas de las funciones hash más utilizadas son las
+	siguientes:
+	\begin{itemize}
+  \item<1->{Función Cuadrada}
+  \item<2->{Función de Plegamiento}
+  \item<3->{Función de Truncamiento}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Propiedades de Función Hash}
+	\begin{itemize}
+  \item<1->{Bajo Costo}
+  \item<2->{Compresión}
+  \item<3->{Uniformidad}
+	\item<4->{Rango Variable}
+  \item<5->{Inyectividad}
+  \item<6->{Determinismo}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Ventajas y Desventajas}
+  \begin{block}{Ventajas}
+  Se pueden usar los valores naturales de la llave, puesto que se traducen
+	internamente a direcciones fáciles de localizar Se logra independencia
+	lógica y física, debido a que los valores de las llaves son
+	independientes del espacio de direcciones No se requiere almacenamiento
+	adicional para los índices.
+  \end{block}
+      
+  \begin{block}{Desventajas}
+  El archivo no esta clasificado No permite llaves repetidas Solo permite
+	acceso por una sola llave Costos Tiempo de procesamiento requerido para
+	la aplicación de la función hash.
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Conclusión}
+	El método de búsqueda hash o por transformación de clave aumenta la
+	velocidad de búsqueda sin necesidad de que los elementos estén
+	previamente ordenados.
+\end{frame}
+
+\begin{frame}
+  \frametitle{}
+      
+  ¿PREGUNTAS?
+\end{frame}
+
+\end{document}
