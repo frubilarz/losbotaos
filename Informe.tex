@@ -320,7 +320,39 @@ La búsqueda de un elemento en el peor de los casos, toma aproximadamente $n/2$ 
 \newpage
 \section{Conclusión}
 
+Las funciones criptográficas hash juegan un papel fundamental en la criptografía moderna. Hay muchas funciones hash, comúnmente usadas en aplicaciones no criptográficas. Nosotros nos referiremos siempre a las que admiten el adjetivo de criptográficas, y las llamaremos habitualmente simplemente funciones hash. 
+
+A continuación se presentan una serie conclusiones:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+
+\item
+Comparada con otras estructuras de arrays asociadas, las tablas hash son más útiles cuando se almacenan grandes cantidades de información.
+
+\item
 El método de búsqueda hash o por transformación de clave aumenta la
 velocidad de búsqueda sin necesidad de que los elementos estén
 previamente ordenados.
+
+\item
+Pueden ser utilizadas en el área de la criptografía, en este caso, son llamadas \emph{funciones hash criptográficas}.
+
+\item
+Si bien, este mpetodo es útil para un gran volúmen de datos, es necesario implementar una buena función de dispersión. De esta manera se aseguran que los datos queden repartidos por toda la tabla de manera uniforme y también se reducen las colisiones posibles.
+
+\item
+Como ya sabemos, este método es ultilizado para almacenar datos. Pero gracias la función hash, este mismo puede ser utilizado en varios campos:
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+Como herramienta base para construir estructuras más complejas.
+\item
+Forma de proteger la integridad de los datos a transmitir (checksum).
+\item
+Herramientas vinculadas a la autenticación y cntrol de acceso.
+\item
+Formas para la identificación y la rápida comparación de datos.
+\end{itemize}
+\end{itemize}
 \end{document}
