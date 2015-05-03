@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc} % acentos sin codigo
 \usepackage{graphicx} % graficos
 \usepackage{picture}
+\usepackage{booktabs}
 
 \begin{document}
 
@@ -59,9 +60,8 @@ funciones matemáticas seleccionadas especialmente. Se hace que el rango
 de valores que puede devolver la función sea de longitud fija: 160 bits
 utilizando la adición modular.
 \newpage
-\section{Cálculo de complejidad}
-Aquí va la complejidad de la tabla hash para el mejor caso y peor caso.
-\newpage
+
+
 
 \section{Función hash}
 
@@ -132,7 +132,63 @@ elegir dígitos (9, 5) = 95\\[0.4cm] Para este caso se tomaron los dígitos
 impares y se unieron de izquierda a derecha.
 \newpage
 
-\subsection{Propiedades de la función hash}
+\section{Tratamiento de colisiones}
+Las colisiones se dan cuando dos llaves apuntan al mismo índice, resultando en que los registros no pueden ser almacenados en la misma posición. Cuando esto ocurre, se debe buscar otra localización para almacenar el nuevo registro, y hacerlo de tal manera que sea posible encontrarlo.
+
+Para dar una idea de la importancia de utilizar una buena estrategia para hacer frente a las colisiones, es bueno considerar que si tenemos un millón de registros, es factible en un 95\% tener al menos una colisión antes de alcanzar las 2500 entradas.
+
+En la literatura, es posible encontrar diferentes técnicas para resolver este problema, sin embargo las resoluciones más populares son las siguientes:
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Direccionamiento cerrado o Hashing abierto: En la técnica más simple de encadenamiento, cada casilla en el array referencia una lista de los registros insertados que colisionan en la misma casilla. La inserción consiste en encontrar la casilla correcta y agregar al final de la lista correspondiente. El borrado consiste en buscar y quitar de la lista.
+  Otras estructuras de datos pueden ser utilizadas para el encadenamiento en lugar de las listas ligadas. Al usar árboles auto-balanceables, por ejemplo, el tiempo teórico del peor de los casos disminuye de O(n) a O(log n). Sin embargo, dado que se supone que cada lista debe ser pequeña, esta estrategia es normalmente ineficiente a menos que la tabla hash sea diseñada para correr a máxima capacidad o existan índices de colisión particularmente grandes. También se pueden utilizar vectores dinámicos para disminuir el espacio extra requerido y mejorar el rendimiento del caché cuando los registros son pequeños.
+\newpage
+\item
+  Direccionamiento abierto o Hashing cerrado: Las tablas hash de direccionamiento abierto pueden almacenar los registros directamente en el array. Las colisiones se resuelven mediante un sondeo del array, en el que se buscan diferentes localidades del array (secuencia de sondeo) hasta que el registro es encontrado o se llega a una casilla vacía, indicando que no existe esa llave en la tabla.
+\end{itemize}
+  Las secuencias de sondeo más utilizadas son:
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+Sondeo lineal.
+\item
+Sondeo cuadrático.
+\item
+Doble Hasheo.
+\end{itemize}
+
+El sondeo lineal ofrece el mejor rendimiento del caché, pero es más sensible al aglomeramiento, en tanto que el doble hasheo tiene pobre rendimiento en el caché pero elimina el problema de aglomeramiento. El sondeo cuadrático se sitúa en medio. El doble hasheo también puede requerir más cálculos que las otras formas de sondeo.
+
+\newpage
+
+\section{Análisis de complejidad}
+
+Como se dijo anterior mente el hashing de direccionamiento cerrado, es la política más sencilla para manejar colisiones,motivo por el cual será objeto de estudio en este informe.
+Entonces, para poder insertar un elemento en el hash, se calcula su valor de dispersión (clave), digamos $i$, y se inserta en la tabla $H(i)$ (que puede ser una lista ligada, un árbol, un vector, etc.). Si la tabla contiene $n$ elementos y $h$ es el tamaño de la tabla, entonces podremos decir que su \emph{factor de carga} se define como: \begin{equation}
+\alpha = n/h
+\end{equation} Siendo $\alpha$ la razón entre cantidad de datos y tamaño de la tabla.
+Para este caso, no es posible suponer que dada una clave, obtendremos el valor que se requiera, ya que varios de estos pueden tener asociada una misma clave. Convirtiendo la función en una del tipo \emph{"muchos a uno"}.
+
+Supóngase que es igualmente probable que tengamos que buscar cualquier elemento de latabla, y que en ella se han almacenado $n$ elementos. ¿Qué costo medio tiene una búsqueda exitosa? Supóngase que el costo de calcular el código de dispersión es igual al costo de efectuar un número pequeño, digamos $a$, de comparaciones de claves. Si el hashing coloca a un elemento en la celda $i$, cuya lista ligada tiene $L_i$ elementos, entonces el número medio de comparaciones necesarias para hallar el elemento será $(L_i + 1)/2$. En tal caso, el costo medio de una búsqueda exitosaestará dado por:
+\begin{equation}
+a + 1/h \sum_{i=0}^{h-1}(L_i + 1)/2
+\end{equation}
+\newpage
+\begin{center}
+\begin{figure}[h]
+\includegraphics[width=265px,height=152px]{./.imagen/colision_case.png}
+\end{figure}
+\end{center}
+Supongamos que se tiene un factor de dispersión de $n/10$, una búsqueda exitosa requerirá entonces de $n/200$ comparaciones de claves. En el peor de los casos, \emph{todos} los elementos se acomodarán a una misma celda y, por lo tanto, una búsqueda exitosa requerirá en promedio $n/2$, o $O(n)$, es decir, demorará lo mismo que si se estuviera realizando la búsqueda en un arreglo de elementos no ordenados. Estos casos se dan cuando la función hash no está bien implementada.
+El mejor de los casos, es cuando las claves que se obtienen de los objetos tienen la probabilidad de pertenecer al intervalor $0, ..., h - 1$. Aquí una búsqueda exitosa requiere en promedio $O(1 + \alpha)$. Y si dentro del factor de carga nuestro $h$ es proporcional a $n$ entonces, en promedio se necesitarán $O(1)$ comparaciones de claves para lograr una búsqueda.
+
+
+
+\newpage
+
+
+\section{Propiedades de la función hash}
 
 La calidad de la función hash, está definida en base a ciertas propiedades (no necesariamente todas deben cumplirse) según el contexto en el cual se esté trabajando, las cuales son:
 \begin{itemize}
@@ -153,6 +209,7 @@ La calidad de la función hash, está definida en base a ciertas propiedades (no
 \end{itemize}
 \newpage
 
+\section{Ventajas y desventajas de la función hash}
 \subsection{Ventajas}
 
 Se pueden usar los valores naturales de la llave, puesto que se traducen
@@ -169,8 +226,55 @@ la aplicación de la función hash
 \newpage
 
 \subsection{Mediciones de tiempo}
+A continuación se presentan las mediciones de tiempo de los algoritmos: Mejor caso, peor caso y caso promedio.
 
-Mediciones de tiempo según la cantidad de datos dadas por enunciado 
+\subsubsection{Mejor caso}
+\begin{center}
+\begin{table}[h]
+\begin{tabular}{lll}
+Cantidad de datos & Dato a buscar & Tiempo de ejecución(ms)\\
+1000   & 993 & 0.00500679 \\
+10000  & 993 & 0.00715256 \\
+100000 & 993 & 0.00691414
+\end{tabular}
+\end{table}
+\end{center}
+Para el mejor caso, no es de importancia verificar con mayor cantidad de datos, dado que la complejidad de búsqueda siempre será constante, $O(1)$, es decir, siempre, la búsqueda, va directo al dato que se requiere. Este es el clásico ejemplo de la función hash perfecta (a cada dato le corresponde una única clave).
+
+\subsubsection{Caso promedio}
+\begin{center}
+\begin{table}[h]
+\begin{tabular}{lll}
+Cantidad de datos & Dato a buscar & Tiempo de ejecución(ms)\\
+1000 & 333     & 0.00596046 \\
+10000 & 4596    & 0.0200272  \\
+100000 & 45946   & 0.00619888 \\
+1000000 & 345234  & 0.0119209  \\
+10000000 & 4543456 & 0.00882149
+\end{tabular}
+\end{table}
+\end{center}
+En este caso, se ve una demora en el acceso de los datos, dado que se encuentran mayores colisiones para cada clave generada por los datos. Lo que va transformando cada búsqueda en una del tipo $O(n)$ o $O(log(n))$
+\newpage
+
+\subsubsection{Peor Caso}
+\begin{center}
+\begin{table}[h]
+\begin{tabular}{lll}
+Cantidad de datos & Dato a buscar & Tiempo de ejecución(ms)\\
+1000 & 207      & 0.00786781 \\
+10000 & 8314    & 0.0190735  \\
+100000 & 70823    & 0.0691414 \\
+1000000 & 805591  & 0.0905991 \\
+10000000 & 9999736  & 0.169277 
+\end{tabular}
+\end{table}
+\end{center}
+La búsqueda de un elemento en el peor de los casos, toma aproximadamente $n/2$ o $O(n)$ comparaciones de claves, un pésimo resultado. Ya que estos no son mejores como los que se dan en un arreglo no ordenado. Mostrando lo importante que es el hecho de escoger una muy buena función hash.
+
+
+
+
 \newpage
 
 \section{Aplicación}
